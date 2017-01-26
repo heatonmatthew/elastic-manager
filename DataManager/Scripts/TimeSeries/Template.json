@@ -1,0 +1,12 @@
+﻿{
+  "template": "*-timeseries-*",
+  "settings": {
+    "number_of_shards": "@@number_of_shards@@",
+    "number_of_replicas": "@@number_of_replicas@@",
+    "refresh_interval": "@@refresh_interval@@",
+    "index.routing.allocation.include.timeSeriesRole": "@@index.routing.allocation.include.timeSeriesRole@@"
+  },
+  "aliases": {
+    "timeseries-indexes": {}
+  } 
+}

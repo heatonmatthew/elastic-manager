@@ -1,0 +1,24 @@
+﻿{
+  // Global default variables
+  "variables": {
+    "number_of_shards": 3,
+    "number_of_replicas": 2
+  },
+  "scoped": {
+    // Override default for timeseries data
+    "timeseries": {
+      "variables": {
+        "number_of_replicas": 1,
+        "refresh_interval": "60s",
+        "index.routing.allocation.include.timeSeriesRole": "active",
+        "index.routing.allocation.include.timeSeriesRole.stable": "stable"
+      }
+    },
+    // Override default for unmanaged data
+    "unmanaged": {
+      "variables": {
+        "number_of_replicas": 3
+      }
+    }
+  }
+}
