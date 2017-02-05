@@ -72,10 +72,7 @@ namespace DataManager.Elastic
             var result = await Client.SearchAsync<Variable>(
                 d => d.Index(Constants.ControlIndex)
                     .Size(1000)
-                    .Query(
-                        q => q.Prefix(
-                            c => c.Field(p => p.PackageId)
-                                .Value(packageId))));
+                    .Query(q => q.Prefix("package-id", packageId)));
 
             return result.Documents;
         }

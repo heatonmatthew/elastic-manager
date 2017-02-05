@@ -17,7 +17,7 @@ namespace XUnitTests.Services.PackageManager.Settings
         public TimeSeriesSettingsTests()
         {
             errorCache = new ErrorCacheMock();
-            globalScope = new NestedScope {Name = Constants.GlobalPackageId};
+            globalScope = new NestedScope {Name = Constants.PackageManagerIdentity};
             packageScope = new NestedScope(globalScope) {Name = "TestPackage"};
 
             AddVariable(globalScope, Constants.GlobalSettings.NoOfShards, DefaultShards);

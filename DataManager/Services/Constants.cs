@@ -13,16 +13,13 @@ namespace DataManager.Services
         // TODO - I think I want to go with semantic versioning here
         public const string CurrentVersion = "1";
 
-        // Reserved identifiers.
-        public const string GlobalPackageId = "Global.v1";
-
         // Shared automation identities
-        public const string PackageManager = "PackageManager";
+        public const string PackageManager = "packagemanager";
         public const string PackageManagerIdentity = PackageManager + ".v" + CurrentVersion;
 
         // PackageManager Index Names
-        public const string ControlIndex = PackageManagerIdentity + ".Control";
-        public const string OpsLogIndex = PackageManagerIdentity + ".OpsLog";
+        public const string ControlIndex = PackageManagerIdentity + ".control";
+        public const string OpsLogIndex = PackageManagerIdentity + ".opslog";
 
         // Shared json property names
         public const string PackageId = "package-id";

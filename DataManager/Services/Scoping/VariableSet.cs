@@ -133,13 +133,20 @@ namespace DataManager.Services.Scoping
         {
             var correlation = byLocalName.CorrelateWith((compareTo as VariableSet)?.byLocalName);
 
-            bulk.IndexMany(correlation.SourceItems.Where(t => t.Item.IsChanged(t.PairedWith)).Select(t => t.Item));
-            bulk.DeleteMany(correlation.NonSourceItems.Select(v => v.Item.Id));
+            bulk.IndexMany(
+                correlation.SourceItems.Where(t => t.Item.IsChanged(t.PairedWith)).Select(t => t.Item),
+                (d, v) => d.Index(Constants.ControlIndex).Document(v));
+
+            bulk.DeleteMany(
+                correlation.NonSourceItems.Select(v => v.Item),
+                (d, v) => d.Index(Constants.ControlIndex).Id(v.Id));
         }
 
         public void RemoveAll(BulkDescriptor bulk)
         {
-            bulk.DeleteMany(byLocalName.Values.Select(v => v.Id));
+            bulk.DeleteMany(
+                byLocalName.Values,
+                (d, v) => d.Index(Constants.ControlIndex).Id(v.Id));
         }
 
         IEnumerator IEnumerable.GetEnumerator()

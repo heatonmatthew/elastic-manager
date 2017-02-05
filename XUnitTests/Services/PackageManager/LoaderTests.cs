@@ -107,7 +107,7 @@ namespace XUnitTests.Services.PackageManager
                 loader.Scope.Store(MakeSampleVariable(TestPackageId, variableName, defaultValue: LocalDefault));
                 loader.Scope.Store(MakeSampleVariable("alternate.package.id", variableName, defaultValue: AlternateDefault));
             }
-            loader.Scope.Store(MakeSampleVariable(Constants.GlobalPackageId, settingName, defaultValue: GlobalDefault));
+            loader.Scope.Store(MakeSampleVariable(Constants.PackageManagerIdentity, settingName, defaultValue: GlobalDefault));
 
             var setting = new SettingValue();
             if (!string.IsNullOrWhiteSpace(variableName))
@@ -139,7 +139,7 @@ namespace XUnitTests.Services.PackageManager
             }
             else if (defaultValue == GlobalDefault)
             {
-                varRef.PackageId.Should().Be(Constants.GlobalPackageId);
+                varRef.PackageId.Should().Be(Constants.PackageManagerIdentity);
             }
             else
             {

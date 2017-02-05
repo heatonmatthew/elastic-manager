@@ -9,8 +9,9 @@
     <OutputType>library</OutputType>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="**\*.cs" />
-    <EmbeddedResource Include="**\*.resx" />
+    <Compile Remove="obj\**" />
+    <EmbeddedResource Remove="obj\**" />
+    <None Remove="obj\**" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Scripts\GlobalData.json">
@@ -22,7 +23,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="NEST" Version="2.4.7" />
-    <PackageReference Include="NETStandard.Library" Version="1.6" />
     <PackageReference Include="Newtonsoft.Json" Version="9.0.1" />
   </ItemGroup>
 </Project>

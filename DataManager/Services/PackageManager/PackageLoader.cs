@@ -37,7 +37,7 @@ namespace DataManager.Services.PackageManager
             // Check for any reserved package names (etc.)
             if (package.Id.StartsWith(Constants.PackageId))
             {
-                ErrorCache.AddError($"Package can't start with the reserved name {Constants.GlobalPackageId}");
+                ErrorCache.AddError($"Package can't start with the reserved name {Constants.PackageManagerIdentity}");
             }
 
             // Check the variables and load them

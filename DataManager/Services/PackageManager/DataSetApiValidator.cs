@@ -111,7 +111,7 @@ namespace DataManager.Services.PackageManager
         {
             var globalRef = new VariableRef
             {
-                PackageId = Constants.GlobalPackageId,
+                PackageId = Constants.PackageManagerIdentity,
                 VariableName = settingName
             };
 

@@ -43,7 +43,7 @@ namespace DataManager.Services.PackageManager
 
         private void RecordChanges(NestedScope current, NestedScope original, BulkDescriptor bulk)
         {
-            var correlation = current.Aspects.CorrelateWith(original.Aspects);
+            var correlation = current.Aspects.CorrelateWith(original?.Aspects);
 
             // Ensure all of the current aspects have changes recorded
             foreach (var tuple in correlation.SourceItems)

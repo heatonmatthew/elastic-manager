@@ -80,6 +80,8 @@ namespace DataManager.Services.GlobalSetup
             }
 
             // Load any child scopes
+            if (data.SubScopes == null) yield break;
+            
             foreach (var pair in data.SubScopes)
             {
                 foreach (var variable in LoadData(pair.Value, $"{packageId}.{pair.Key}"))

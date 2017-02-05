@@ -42,7 +42,7 @@ namespace DataManager.Services.PackageManager
 
         #region Schema Preparation
 
-        public async Task PreparePackageManagerSchemaAsync()
+        public async Task SetupPackageManagerSchemaAsync()
         {
             await PrepareTemplatesAsync();
             await PrepareIndexesAsync();
@@ -54,9 +54,8 @@ namespace DataManager.Services.PackageManager
             var desired = ScriptLoader.LoadTemplates();
 
             var correlation = desired.CorrelateWith(existing);
-            Task.WaitAll(
-                Repository.CreateIndexTemplatesAsync(desired),
-                Repository.DeleteIndexTemplatesAsync(correlation.NonSourceItems.Select(i => i.Key)));
+            await Repository.CreateIndexTemplatesAsync(desired);
+            await Repository.DeleteIndexTemplatesAsync(correlation.NonSourceItems.Select(i => i.Key));
         }
 
         private async Task PrepareIndexesAsync()
@@ -84,13 +83,17 @@ namespace DataManager.Services.PackageManager
         {
             // Load the original state
             var scopes = await LoadFromElasticAsync();
-            cache.SetOriginalState(scopes.Values.First(s => s.IsTopMost));
+            var topScope = scopes.Values.FirstOrDefault(s => s.IsTopMost);
+            cache.SetOriginalState(topScope ?? new NestedScope {Name = Constants.PackageManagerIdentity});
 
             // Now merge in the Global defaults to the CurrentState clone (of the original)
             MergeDefaults(cache.CurrentState.ToDictionary());
+        }
 
+        public async Task LoadGlobalPackageDataAsync()
+        {
             // Setup a bulk operation to record the changes
-            var bulk = new BulkDescriptor().Index(Constants.ControlIndex);
+            var bulk = new BulkDescriptor();
             cache.RecordChanges(bulk);
             await Repository.SaveAllAsync(bulk);
         }

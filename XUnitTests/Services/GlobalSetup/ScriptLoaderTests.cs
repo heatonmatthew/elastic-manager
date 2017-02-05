@@ -25,7 +25,7 @@ namespace XUnitTests.Services.GlobalSetup
 
             scope.Store(new Variable
             {
-                PackageId = Constants.GlobalPackageId,
+                PackageId = Constants.PackageManagerIdentity,
                 Name = "var1",
                 Default = "1",
                 Type = SupportedTypes.Integer.GetStringValue(),
@@ -34,7 +34,7 @@ namespace XUnitTests.Services.GlobalSetup
 
             scope.Store(new Variable
             {
-                PackageId = Constants.GlobalPackageId,
+                PackageId = Constants.PackageManagerIdentity,
                 Name = "var_2",
                 Default = "60s",
                 Type = SupportedTypes.String.GetStringValue(),
